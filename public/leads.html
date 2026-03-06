@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Leads — Plomada</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- Navigation bar — shared across pages -->
+  <header>
+    <h1>PLOMADA</h1>
+    <nav>
+      <a href="/">New Lead</a>
+      <a href="/leads.html" class="active">All Leads</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="page-title">
+      <h2>All Leads</h2>
+      <p>Every inquiry, newest first. Score and verdict will be filled by AI qualification (coming soon).</p>
+    </div>
+
+    <!-- This div gets populated by leads.js -->
+    <div id="leads-container">
+      <p style="color: #888;">Loading...</p>
+    </div>
+  </div>
+
+  <script src="/leads.js"></script>
+</body>
+</html>

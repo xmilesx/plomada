@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Lead — Plomada</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- Navigation bar — shared across pages -->
+  <header>
+    <h1>PLOMADA</h1>
+    <nav>
+      <a href="/" class="active">New Lead</a>
+      <a href="/leads.html">All Leads</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="page-title">
+      <h2>Lead Intake</h2>
+      <p>Capture a new inquiry. Fill in what you know — you can always add more later.</p>
+    </div>
+
+    <!-- Flash message area (shown/hidden by JS) -->
+    <div id="flash" class="flash"></div>
+
+    <form id="lead-form">
+
+      <!-- Row 1: Source & Project Type -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="lead_source">Lead Source</label>
+          <select id="lead_source" name="lead_source">
+            <option value="">— Select —</option>
+            <option value="referral">Referral</option>
+            <option value="google">Google Search</option>
+            <option value="instagram">Instagram</option>
+            <option value="houzz">Houzz</option>
+            <option value="architect">Architect Referral</option>
+            <option value="repeat_client">Repeat Client</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="project_type">Project Type</label>
+          <select id="project_type" name="project_type">
+            <option value="">— Select —</option>
+            <option value="gut_renovation">Gut Renovation</option>
+            <option value="kitchen">Kitchen Remodel</option>
+            <option value="bathroom">Bathroom Remodel</option>
+            <option value="addition">Addition</option>
+            <option value="basement">Basement Finish</option>
+            <option value="whole_house">Whole House Remodel</option>
+            <option value="adu">ADU / Accessory Dwelling</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 2: Neighborhood & Budget -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="neighborhood">Neighborhood</label>
+          <select id="neighborhood" name="neighborhood">
+            <option value="">— Select —</option>
+            <option value="capitol_hill">Capitol Hill</option>
+            <option value="georgetown">Georgetown</option>
+            <option value="dupont_circle">Dupont Circle</option>
+            <option value="logan_circle">Logan Circle</option>
+            <option value="shaw">Shaw</option>
+            <option value="petworth">Petworth</option>
+            <option value="brookland">Brookland</option>
+            <option value="columbia_heights">Columbia Heights</option>
+            <option value="cleveland_park">Cleveland Park</option>
+            <option value="takoma">Takoma</option>
+            <option value="anacostia">Anacostia</option>
+            <option value="navy_yard">Navy Yard</option>
+            <option value="adams_morgan">Adams Morgan</option>
+            <option value="woodley_park">Woodley Park</option>
+            <option value="other">Other (see notes)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="stated_budget">Stated Budget</label>
+          <select id="stated_budget" name="stated_budget">
+            <option value="">— Select —</option>
+            <option value="under_50k">Under $50k</option>
+            <option value="50k_100k">$50k – $100k</option>
+            <option value="100k_200k">$100k – $200k</option>
+            <option value="200k_400k">$200k – $400k</option>
+            <option value="400k_750k">$400k – $750k</option>
+            <option value="750k_plus">$750k+</option>
+            <option value="not_discussed">Not Discussed</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 3: Timeline & Property Status -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="timeline">Timeline</label>
+          <select id="timeline" name="timeline">
+            <option value="">— Select —</option>
+            <option value="asap">ASAP</option>
+            <option value="1_3_months">1–3 months</option>
+            <option value="3_6_months">3–6 months</option>
+            <option value="6_12_months">6–12 months</option>
+            <option value="just_exploring">Just Exploring</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="property_status">Property Status</label>
+          <select id="property_status" name="property_status">
+            <option value="">— Select —</option>
+            <option value="own_it">Own It</option>
+            <option value="under_contract">Under Contract</option>
+            <option value="shopping">Still Shopping</option>
+            <option value="inherited">Inherited</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 4: Architect & Decision Maker -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="architect_involved">Architect Involved?</label>
+          <select id="architect_involved" name="architect_involved">
+            <option value="">— Select —</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            <option value="not_yet">Not Yet</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="decision_maker">Talking to Decision Maker?</label>
+          <select id="decision_maker" name="decision_maker">
+            <option value="">— Select —</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            <option value="unsure">Unsure</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 5: Funding Type -->
+      <div class="form-group">
+        <label for="funding_type">Funding Type</label>
+        <select id="funding_type" name="funding_type">
+          <option value="">— Select —</option>
+          <option value="cash">Cash / Savings</option>
+          <option value="construction_loan">Construction Loan</option>
+          <option value="heloc">HELOC</option>
+          <option value="renovation_mortgage">Renovation Mortgage (203k / HomeStyle)</option>
+          <option value="not_discussed">Not Discussed</option>
+        </select>
+      </div>
+
+      <!-- Notes -->
+      <div class="form-group">
+        <label for="notes">Notes</label>
+        <textarea id="notes" name="notes" placeholder="Anything else — who referred them, red flags, special requests, etc."></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="submit-btn">Save Lead</button>
+    </form>
+  </div>
+
+  <script src="/intake.js"></script>
+</body>
+</html>

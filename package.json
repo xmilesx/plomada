@@ -1,0 +1,14 @@
+{
+  "name": "plomada",
+  "version": "0.1.0",
+  "description": "Plomada — GC operating system for residential design-build contractors in DC",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "sql.js": "^1.11.0"
+  }
+}
