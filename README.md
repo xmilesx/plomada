@@ -23,7 +23,7 @@ Node.js, Express and sql.js. No external services.
 
 ## The rest of the system
 
-The other Plomada modules started as AI skills on Claude that I used in the business. They're published in [construction-ai-toolkit](https://github.com/xmilesx/construction-ai-toolkit):
+The other Plomada modules started as AI skills on Claude that I used in the business. They.re in [ai-skills](ai-skills/):
 
 - ballpark cost ranges for DC renovation work
 - preliminary schedules with DC permit and inspection milestones

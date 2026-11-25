@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ address }} | Feasibility Study</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+        
+        :root {
+            --bbcdc-red: #E62B25;
+            --bbcdc-red-dark: #c41f1a;
+            --text-primary: #1D1E20;
+            --text-secondary: #353535;
+            --text-tertiary: #727586;
+            --border: #dadce0;
+            --bg-light: #f7f7f7;
+            --bg-white: #ffffff;
+            --shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @page {
+            size: letter;
+            margin: 0.6in 0.75in;
+            @bottom-right {
+                content: counter(page);
+                font-family: 'DM Sans', sans-serif;
+                font-size: 9px;
+                color: var(--text-tertiary);
+            }
+        }
+        
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 10px;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background: var(--bg-white);
+        }
+        
+        /* Header */
+        .report-header {
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+            border-bottom: 2px solid var(--bbcdc-red);
+        }
+        
+        .report-title-block {
+            text-align: left;
+        }
+        
+        .report-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .report-subtitle {
+            font-size: 10px;
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+        
+        .report-date {
+            font-size: 9px;
+            color: var(--text-tertiary);
+            margin-top: 4px;
+        }
+        
+        /* Phase/Section Headers - Red Banner Pills */
+        .section-header {
+            background: var(--bbcdc-red);
+            color: white;
+            padding: 8px 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 2px;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+        
+        section {
+            margin-bottom: 28px;
+            page-break-inside: avoid;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .card-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        
+        .card-subtitle {
+            font-size: 9px;
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .card-value {
+            font-size: 9px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        .card-value strong {
+            color: var(--text-primary);
+        }
+        
+        /* Grid icon in corner (mimicking roadmap) */
+        .card::after {
+            content: "⋮⋮⋮";
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            font-size: 8px;
+            color: var(--border);
+            letter-spacing: 1px;
+        }
+        
+        /* Key Metrics - Large Numbers */
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .metric-card {
+            background: var(--bg-light);
+            border-left: 3px solid var(--bbcdc-red);
+            padding: 12px 14px;
+        }
+        
+        .metric-label {
+            font-size: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-tertiary);
+            margin-bottom: 4px;
+        }
+        
+        .metric-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.1;
+        }
+        
+        .metric-value-sm {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+        
+        .metric-note {
+            font-size: 8px;
+            font-style: italic;
+            color: var(--text-tertiary);
+            margin-top: 2px;
+        }
+        
+        .metric-code {
+            font-size: 7px;
+            color: var(--text-tertiary);
+            margin-top: 2px;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9px;
+        }
+        
+        th {
+            text-align: left;
+            font-size: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-tertiary);
+            padding: 8px 0;
+            border-bottom: 2px solid var(--bbcdc-red);
+        }
+        
+        td {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        
+        td:first-child {
+            font-weight: 600;
+            color: var(--text-primary);
+            width: 40%;
+        }
+        
+        td:last-child {
+            color: var(--text-secondary);
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Status Pills */
+        .status {
+            display: inline-block;
+            font-size: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 3px 10px;
+            border-radius: 2px;
+        }
+        
+        .status-ok {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .status-warning {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+        
+        .status-alert {
+            background: #ffebee;
+            color: var(--bbcdc-red);
+        }
+        
+        /* Callout Boxes */
+        .callout {
+            padding: 14px 16px;
+            border-radius: 2px;
+            margin-bottom: 16px;
+            border-left: 4px solid;
+        }
+        
+        .callout-alert {
+            background: #ffebee;
+            border-color: var(--bbcdc-red);
+        }
+        
+        .callout-warning {
+            background: #fff3e0;
+            border-color: #ef6c00;
+        }
+        
+        .callout-info {
+            background: var(--bg-light);
+            border-color: var(--text-primary);
+        }
+        
+        .callout-title {
+            font-weight: 700;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        
+        .callout-text {
+            font-size: 9px;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin-left: 16px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+            font-size: 9px;
+        }
+        
+        li {
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+        
+        /* Two column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        /* Value statement (mimicking roadmap) */
+        .value-statement {
+            font-size: 9px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+        
+        .value-statement::before {
+            content: "Value: ";
+            font-weight: 700;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+        
+        /* Sources */
+        .sources {
+            font-size: 8px;
+            color: var(--text-tertiary);
+        }
+        
+        .sources a {
+            color: var(--bbcdc-red);
+            text-decoration: none;
+        }
+        
+        /* Footer */
+        .report-footer {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            font-size: 8px;
+            color: var(--text-tertiary);
+            font-style: italic;
+        }
+        
+        /* Print */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="report-header">
+        <div class="report-title-block">
+            <h1 class="report-title">{{ address }}</h1>
+            <p class="report-subtitle">Property Feasibility Study · Washington, DC</p>
+            <p class="report-date">Prepared {{ date }}</p>
+        </div>
+    </header>
+    
+    <!-- Key Metrics -->
+    <div class="metrics-row">
+        <div class="metric-card">
+            <div class="metric-label">Zone</div>
+            <div class="metric-value">{{ zone }}</div>
+            <div class="metric-code">{{ zone_code_ref }}</div>
+            <div class="metric-note">Source: PropertyQuest DC</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Lot Area</div>
+            <div class="metric-value">{{ lot_sf }}</div>
+            <div class="metric-note">SF · Source: PropertyQuest DC</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Max Buildable</div>
+            <div class="metric-value-sm">{{ max_buildable_sf }}</div>
+            <div class="metric-note">above grade (see calc. below)</div>
+            <div class="metric-code">{{ max_buildable_code_ref }}</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Units</div>
+            <div class="metric-value-sm">{{ max_units }}</div>
+            <div class="metric-note">matter-of-right</div>
+            <div class="metric-code">{{ max_units_code_ref }}</div>
+        </div>
+    </div>
+    
+    <!-- Max Buildable Calculation Logic -->
+    <div class="callout callout-info">
+        <div class="callout-title">Max Buildable Calculation</div>
+        <p class="callout-text"><strong>RF-1 does not use FAR as primary density control.</strong> Instead, density is controlled by lot occupancy (building footprint as % of lot area) and height limits.</p>
+        <p class="callout-text" style="margin-top: 8px;"><strong>Calculation:</strong> Max Buildable = Lot Area × Max Lot Occupancy × Stories<br>
+        For this lot: {{ lot_sf }} SF × 60% = {{ max_footprint_sf }} SF footprint × 3 stories = {{ max_buildable_sf }} above grade</p>
+        <p class="callout-text" style="margin-top: 8px;"><strong>FAR comparison:</strong> If RF-1 used FAR 1.0, this lot would only allow {{ lot_sf }} SF. The lot occupancy method allows more density ({{ max_buildable_sf }}) because you can build multiple stories within the allowed footprint.</p>
+        <p class="callout-text" style="margin-top: 8px;"><em>Actual buildable requires architectural design accounting for setbacks, party walls, and structural constraints.</em></p>
+    </div>
+    
+    <!-- Constraints Alert -->
+    {% if constraints %}
+    <div class="callout callout-alert">
+        <div class="callout-title">Key Constraints</div>
+        <p class="callout-text">{{ constraints }}</p>
+    </div>
+    {% endif %}
+    
+    <!-- Property Identification -->
+    <section>
+        <div class="section-header">Property Identification</div>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">Ownership</div>
+                <div class="card-subtitle">Source: PropertyQuest · Verify via DC OTR: mytax.dc.gov</div>
+                <table>
+                    <tr><td>Owner</td><td>{{ owner }} <span class="sources">[<a href="https://propertyquest.dc.gov">PropertyQuest</a> - verify <a href="https://mytax.dc.gov/_/">OTR</a>]</span></td></tr>
+                    <tr><td>Mailing Address</td><td>{{ owner_address }} <span class="sources">[<a href="https://propertyquest.dc.gov">PropertyQuest</a>]</span></td></tr>
+                    <tr><td>SSL</td><td>{{ ssl }} <span class="sources">[<a href="https://propertyquest.dc.gov">PropertyQuest</a>]</span></td></tr>
+                </table>
+            </div>
+            <div class="card">
+                <div class="card-title">Property Data</div>
+                <div class="card-subtitle">Source: PropertyQuest + Redfin</div>
+                <table>
+                    <tr><td>Neighborhood</td><td>{{ neighborhood }} <span class="sources">[<a href="https://propertyquest.dc.gov">PropertyQuest</a>]</span></td></tr>
+                    <tr><td>Year Built</td><td>{{ year_built }} <span class="sources">[<a href="https://www.redfin.com">Redfin</a> - verify <a href="https://scout.dcra.dc.gov">Scout DC</a>]</span></td></tr>
+                    <tr><td>2026 Assessment</td><td>{{ assessment }} <span class="sources">[<a href="https://propertyquest.dc.gov">PropertyQuest</a>]</span></td></tr>
+                    <tr><td>Last Sale</td><td>{{ last_sale }} <span class="sources">[<a href="https://propertyquest.dc.gov">PropertyQuest</a>]</span></td></tr>
+                </table>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Zoning Analysis -->
+    <section>
+        <div class="section-header">Zoning Analysis</div>
+        <div class="card">
+            <div class="card-title">{{ zone }} - {{ zone_description }}</div>
+            <div class="card-subtitle">DC Zoning Regulations 2016 (ZR16) · Source: dcoz.dc.gov</div>
+            <div class="two-col" style="margin-top: 12px;">
+                <div>
+                    <table>
+                        <tr><td>Maximum Height</td><td>{{ max_height }} <span class="sources">[<a href="https://dcoz.dc.gov/sites/default/files/dc/sites/dcoz/publication/attachments/SubtitleE_0.pdf">§ 303</a>]</span></td></tr>
+                        <tr><td>Maximum Lot Occupancy</td><td>{{ max_lot_occupancy }} <span class="sources">[<a href="https://dcoz.dc.gov/sites/default/files/dc/sites/dcoz/publication/attachments/SubtitleE_0.pdf">§ 304</a>]</span></td></tr>
+                        <tr><td>Lot Area per Unit</td><td>{{ lot_area_per_unit }}</td></tr>
+                        <tr><td>Pervious Surface</td><td>{{ pervious }} <span class="sources">[<a href="https://dcoz.dc.gov/sites/default/files/dc/sites/dcoz/publication/attachments/SubtitleE_0.pdf">§ 204</a>]</span></td></tr>
+                    </table>
+                </div>
+                <div>
+                    <table>
+                        <tr><td>Lot Width (Est.)</td><td>{{ lot_width }}</td></tr>
+                        <tr><td>Lot Depth (Est.)</td><td>{{ lot_depth }}</td></tr>
+                        <tr><td>Maximum Units</td><td>{{ max_units }} <span class="sources">[<a href="https://dcoz.dc.gov/sites/default/files/dc/sites/dcoz/publication/attachments/SubtitleE_0.pdf">§ 302.1</a>]</span></td></tr>
+                        <tr><td>FAR</td><td>{{ far }}</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="callout callout-info">
+            <div class="callout-title">Lot Dimension Derivation</div>
+            <p class="callout-text"><strong>PropertyQuest does not provide lot width/depth.</strong> Survey required for accurate dimensions. Estimates above derived from: (1) Typical DC rowhouse width (14-20'), (2) Calculated depth = Lot Area ÷ Width.</p>
+            <p class="callout-text" style="margin-top: 8px;"><strong>Lot Area per Unit (§ 201.4):</strong> The 900 SF/unit minimum applies ONLY to apartment houses (3+ units) adding dwelling units. It does NOT apply to standard 2-unit flat conversions under § 302.1.</p>
+        </div>
+        
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">Setback Requirements</div>
+                <div class="card-subtitle">ZR16 Subtitle E §§ 305-307</div>
+                <table>
+                    <tr><td>Front Setback</td><td>{{ front_setback }} <span class="sources">[<a href="https://dcoz.dc.gov/sites/default/files/dc/sites/dcoz/publication/attachments/SubtitleE_0.pdf">§ 305.1</a>]</span></td></tr>
+                    <tr><td>Front Setback Rule</td><td>{{ front_setback_rule }}</td></tr>
+                    <tr><td>Rear Yard</td><td>{{ rear_yard }} <span class="sources">[<a href="https://dcoz.dc.gov/sites/default/files/dc/sites/dcoz/publication/attachments/SubtitleE_0.pdf">§ 306.1</a>]</span></td></tr>
+                    <tr><td>Side Yard</td><td>{{ side_yard }} <span class="sources">[<a href="https://dcoz.dc.gov/sites/default/files/dc/sites/dcoz/publication/attachments/SubtitleE_0.pdf">§ 307.3</a>]</span></td></tr>
+                </table>
+                <p class="value-statement"><strong>How to derive Front Setback:</strong> § 305.1 requires buildings to be "within the range of existing front setbacks of all structures on the same side of the street in the block." Measure from property line to front wall of 3-5 adjacent buildings. Typically 8-15' in established rowhouse neighborhoods.</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Parking Requirements</div>
+                <div class="card-subtitle">ZR16 Subtitle C § 701</div>
+                <table>
+                    <tr><td>Required Spaces</td><td>{{ parking_required }} <span class="sources">[<a href="https://dcoz.dc.gov/sites/default/files/dc/sites/dcoz/publication/attachments/SubtitleC_0.pdf">Subtitle C</a>]</span></td></tr>
+                    <tr><td>Parking Ratio</td><td>{{ parking_ratio }} <span class="sources">[<a href="https://dcoz.dc.gov/sites/default/files/dc/sites/dcoz/publication/attachments/SubtitleC_0.pdf">Subtitle C</a>]</span></td></tr>
+                    <tr><td>Off-Street Feasibility</td><td>{{ offstreet_parking_feasibility }} <span class="sources">[verify on site]</span></td></tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">Rooftop & Cornice Requirements</div>
+            <div class="card-subtitle">ZR16 Subtitle E § 206 · <strong>Verify all conditions on site</strong></div>
+            <table>
+                <tr><td>Front Cornice</td><td>{{ cornice_requirement }}</td></tr>
+                <tr><td>Mansard Present</td><td>{{ mansard_present }}</td></tr>
+                <tr><td>Rooftop Addition Rules</td><td>{{ rooftop_rules }} <span class="sources">[<a href="https://dcoz.dc.gov/sites/default/files/dc/sites/dcoz/publication/attachments/SubtitleE_0.pdf">§ 206.1</a>]</span></td></tr>
+            </table>
+            <p class="value-statement">Original front cornice must be maintained for rooftop additions. Additions must be set back from front facade.</p>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">Rear Wall Extension (10' Rule)</div>
+            <div class="card-subtitle">ZR16 Subtitle E § 205.4</div>
+            <p class="card-value">{{ ten_foot_rule_explanation }}</p>
+            <div class="callout callout-warning" style="margin-top: 8px;">
+                <p class="callout-text"><strong>Code Text:</strong> "A rear wall of a row or semi-detached building shall not extend more than ten feet (10 ft.) beyond the farthest rear wall of any adjoining principal residential building on any adjacent property."</p>
+            </div>
+        </div>
+        
+        {% if year_built and year_built_year and year_built_year < 1958 %}
+        <div class="card">
+            <div class="card-title">Pre-1958 Building Provisions</div>
+            <div class="card-subtitle">Building constructed {{ year_built_year }} — Special provisions apply</div>
+            <table>
+                <tr>
+                    <td><strong>§ 302.2</strong></td>
+                    <td>More than 2 units <em>may be permitted</em> via Subtitle U § 320.2 <strong>(requires BZA special exception - NOT matter-of-right)</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>§ 205.3</strong></td>
+                    <td>Rear yard extensions permitted within original 1958 building footprint</td>
+                </tr>
+                <tr>
+                    <td><strong>Subtitle U § 320.2</strong></td>
+                    <td>Conversion to apartment house requires BZA SE approval, 900 SF min lot area/unit, 35' height (40' by SE)</td>
+                </tr>
+            </table>
+            <div class="callout callout-warning" style="margin-top: 8px;">
+                <p class="callout-text"><strong>⚠️ IMPORTANT:</strong> Pre-1958 status makes >2 units <em>possible</em>, not automatic. Adding a 3rd+ unit ALWAYS requires BZA special exception approval under Subtitle U § 320.2. This is NOT a matter-of-right entitlement.</p>
+            </div>
+            <div class="callout callout-info" style="margin-top: 8px;">
+                <p class="callout-text"><strong>§ 302.2 Code Text:</strong> "A building or structure existing before May 12, 1958 in the RF-1 zone may be used for more than two (2) dwelling units pursuant to Subtitle U, Chapter 3."</p>
+            </div>
+            <div class="callout callout-info" style="margin-top: 8px;">
+                <p class="callout-text"><strong>§ 205.3 Code Text:</strong> "In the case of a building existing on or before May 12, 1958, an extension or addition may be made to the building into the required rear yard; provided, that the extension or addition shall be limited to that portion of the rear yard included in the building area on May 12, 1958."</p>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if zoning_citations %}
+        <div class="card">
+            <div class="card-title">Applicable Code Sections</div>
+            <div class="card-subtitle">Direct links to ZR16</div>
+            <table>
+                {% for cite in zoning_citations %}
+                <tr>
+                    <td>{{ cite.section }}</td>
+                    <td>{{ cite.description }} <a href="{{ cite.url }}" class="sources">→</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+    </section>
+    
+    <!-- Historic Status -->
+    <section>
+        <div class="section-header">Historic Preservation</div>
+        <div class="card">
+            <div class="card-title">Historic District Status</div>
+            <div class="card-subtitle">Source: PropertyQuest · Verify via DC HPO Inventory</div>
+            <table>
+                <tr>
+                    <td>Historic District</td>
+                    <td>
+                        {% if historic_district %}
+                        <span class="status status-warning">{{ historic_district }}</span>
+                        {% else %}
+                        <span class="status status-ok">Not in Historic District (per PropertyQuest)</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr><td>HPRB Review Required</td><td>{{ hprb_required }}</td></tr>
+            </table>
+            <p class="value-statement"><strong>⚠️ Verify historic status via DC Historic Preservation Office:</strong> <a href="https://planning.dc.gov/page/historic-preservation">planning.dc.gov/page/historic-preservation</a>. PropertyQuest may not reflect all historic resources or pending nominations.</p>
+        </div>
+    </section>
+    
+    <!-- Existing Conditions -->
+    <section>
+        <div class="section-header">Existing Conditions</div>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">Building Data</div>
+                <div class="card-subtitle">Source: {{ building_data_source }}</div>
+                <table>
+                    <tr><td>Living Area</td><td>{{ living_sf }} SF <span class="sources">[<a href="https://www.redfin.com">Redfin</a>]</span></td></tr>
+                    <tr><td>Basement/Cellar</td><td>{{ basement_sf }} SF {{ basement_type }} <span class="sources">[<a href="https://www.redfin.com">Redfin</a>]</span></td></tr>
+                    <tr><td>Total Building</td><td>{{ total_building_sf }} SF <span class="sources">[calc.]</span></td></tr>
+                    <tr><td>Current Height</td><td>{{ current_height }} <span class="sources">[estimate - verify on site]</span></td></tr>
+                    <tr><td>Stories</td><td>{{ current_stories }} <span class="sources">[<a href="https://www.redfin.com">Redfin</a>]</span></td></tr>
+                    <tr><td>Bed / Bath</td><td>{{ bed_bath }} <span class="sources">[<a href="https://www.redfin.com">Redfin</a>]</span></td></tr>
+                </table>
+                <p class="value-statement"><strong>Height derivation:</strong> Estimated from Google Street View (typical ~10-11'/story above grade). Survey or site measurement required for accurate height.</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Lot Coverage</div>
+                <table>
+                    <tr><td>Current Coverage</td><td>{{ current_coverage }}</td></tr>
+                    <tr><td>Maximum Allowed</td><td>{{ max_lot_occupancy }} <span class="sources">[<a href="https://dcoz.dc.gov/sites/default/files/dc/sites/dcoz/publication/attachments/SubtitleE_0.pdf">§ 304.1</a>]</span></td></tr>
+                    <tr><td>Available</td><td>{{ available_coverage }}</td></tr>
+                </table>
+                <p class="value-statement">Room for horizontal expansion within matter-of-right envelope.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Permit History -->
+    <section>
+        <div class="section-header">Permit & Violation History</div>
+        <div class="card">
+            <div class="card-title">Scout DC Records</div>
+            <div class="card-subtitle">DC Department of Buildings database</div>
+            {% if permits %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Permit #</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for permit in permits %}
+                    <tr>
+                        <td>{{ permit.number }}</td>
+                        <td>{{ permit.type }}</td>
+                        <td>{{ permit.date }}</td>
+                        <td><span class="status status-{{ permit.status_class }}">{{ permit.status }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p class="card-value">No permits found in database. Verify via Scout DC with Access DC login.</p>
+            {% endif %}
+        </div>
+        
+        {% if violations %}
+        <div class="callout callout-alert">
+            <div class="callout-title">Open Violations</div>
+            <p class="callout-text">{{ violations }}</p>
+        </div>
+        {% endif %}
+    </section>
+    
+    <!-- Development Potential -->
+    <section>
+        <div class="section-header">Development Potential</div>
+        
+        <div class="callout callout-warning">
+            <div class="callout-title">⚠️ ALL ESTIMATES REQUIRE VERIFICATION</div>
+            <p class="callout-text">All SF estimates are preliminary calculations based on zoning envelope only. <strong>Actual buildable area requires architectural design and structural engineering verification.</strong> Party wall conditions, foundation capacity, and site-specific constraints may significantly reduce potential. These figures are for initial feasibility assessment only.</p>
+        </div>
+        
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">Vertical Addition</div>
+                <div class="card-subtitle">Third story / rooftop potential</div>
+                <table>
+                    <tr><td>Current Height</td><td>{{ current_height }} <span class="sources">[estimate - verify on site]</span></td></tr>
+                    <tr><td>Maximum Allowed</td><td>{{ max_height }} <span class="sources">[<a href="https://dcoz.dc.gov/sites/default/files/dc/sites/dcoz/publication/attachments/SubtitleE_0.pdf">§ 303</a>]</span></td></tr>
+                    <tr><td>Potential</td><td>{{ vertical_potential }} <span class="sources">[verify w/ architect]</span></td></tr>
+                    <tr><td>Estimated SF</td><td>{{ vertical_sf }} <span class="sources">[estimate - verify w/ architect]</span></td></tr>
+                </table>
+                {% if vertical_constraints %}
+                <div class="callout callout-warning" style="margin-top: 8px; padding: 8px 12px;">
+                    <p class="callout-text"><strong>Constraints:</strong> {{ vertical_constraints }}</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="card">
+                <div class="card-title">Horizontal Addition</div>
+                <div class="card-subtitle">Pop-back / rear extension</div>
+                <table>
+                    <tr><td>10' Rule Applies</td><td>{{ ten_foot_rule }} <span class="sources">[<a href="https://dcoz.dc.gov/sites/default/files/dc/sites/dcoz/publication/attachments/SubtitleE_0.pdf">§ 205.4</a> - survey adjacent]</span></td></tr>
+                    <tr><td>Potential</td><td>{{ horizontal_potential }} <span class="sources">[verify w/ architect]</span></td></tr>
+                    <tr><td>Estimated SF</td><td>{{ horizontal_sf }} <span class="sources">[estimate - verify w/ architect]</span></td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">Basement / Underpinning</div>
+                <table>
+                    <tr><td>Current Cellar</td><td>{{ basement_sf }} SF <span class="sources">[<a href="https://www.redfin.com">Redfin</a> - verify on site]</span></td></tr>
+                    <tr><td>Est. Ceiling Height</td><td>{{ current_cellar_height }} <span class="sources">[estimate - verify on site]</span></td></tr>
+                    <tr><td>Underpinning Potential</td><td>{{ underpin_potential }} <span class="sources">[verify w/ structural engineer]</span></td></tr>
+                    <tr><td>Post-Underpin Cellar</td><td>{{ underpin_sf }} <span class="sources">[estimate - verify w/ structural engineer]</span></td></tr>
+                </table>
+                <p class="value-statement">Underpinning requires structural engineering, party wall agreements, and specialized contractor. Feasibility depends on soil conditions, existing foundation, and adjacent structures.</p>
+            </div>
+        </div>
+        
+        <div class="card" style="background: var(--bg-light);">
+            <div class="card-title">Maximum Buildable Area Summary</div>
+            <div class="card-subtitle">⚠️ PRELIMINARY ESTIMATES ONLY - Requires architect and structural engineer verification</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>Est. SF</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Cellar (underpinned)</td><td>{{ buildable_cellar_sf }}</td><td>Full footprint at 8'+ ceiling <span class="sources">[estimate]</span></td></tr>
+                    <tr><td>Main Level 1</td><td>{{ buildable_level1_sf }}</td><td>At 60% lot occupancy <span class="sources">[estimate]</span></td></tr>
+                    <tr><td>Main Level 2</td><td>{{ buildable_level2_sf }}</td><td>At 60% lot occupancy <span class="sources">[estimate]</span></td></tr>
+                    <tr><td>Level 3 (addition)</td><td>{{ buildable_level3_sf }}</td><td>{{ level3_notes }} <span class="sources">[estimate]</span></td></tr>
+                    <tr style="font-weight: 700; background: #fff;"><td>Total Above Grade</td><td><strong>{{ max_above_grade }}</strong></td><td><span class="sources">[estimate - verify w/ architect]</span></td></tr>
+                    <tr style="font-weight: 700; background: #fff;"><td>Total Including Cellar</td><td><strong>{{ max_total }}</strong></td><td><span class="sources">[estimate - verify w/ architect]</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <!-- Regulatory Pathway -->
+    <section>
+        <div class="section-header">Regulatory Pathway</div>
+        <div class="callout callout-info">
+            <div class="callout-title">Recommended Path</div>
+            <p class="callout-text">{{ recommended_path }}</p>
+        </div>
+        
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">Matter-of-Right Options</div>
+                <div class="card-subtitle">No BZA approval required</div>
+                <ul>
+                    {% for option in mor_options %}
+                    <li>{{ option }}</li>
+                    {% endfor %}
+                </ul>
+                <p class="value-statement">Fastest path to permit. Typical timeline: {{ mor_timeline }}</p>
+            </div>
+            
+            {% if bza_triggers %}
+            <div class="card">
+                <div class="card-title">BZA Special Exception Triggers</div>
+                <div class="card-subtitle">Requires Board of Zoning Adjustment approval</div>
+                <ul>
+                    {% for trigger in bza_triggers %}
+                    <li>{{ trigger }}</li>
+                    {% endfor %}
+                </ul>
+                <p class="value-statement">Add {{ bza_timeline }} to project timeline if BZA required.</p>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    
+    <!-- Fire Protection / Sprinkler Requirements -->
+    <section>
+        <div class="section-header">Fire Protection Requirements</div>
+        
+        <div class="callout callout-warning">
+            <div class="callout-title">⚠️ Verify with DC Fire & EMS</div>
+            <p class="callout-text">Sprinkler requirements depend on building classification, occupancy type, and scope of work. This summary is for preliminary planning only. Consult DC DOB and FEMS for project-specific requirements.</p>
+        </div>
+        
+        <div class="callout callout-info">
+            <div class="callout-title">⚠️ IMPORTANT: IBC Occupancy Classifications ≠ DC Zoning</div>
+            <p class="callout-text"><strong>R-2 and R-3 in this section are IBC (International Building Code) occupancy classifications used to determine fire protection requirements.</strong> These are NOT the same as DC zoning designations (RF-1, RF-2, RF-3, etc.).</p>
+            <p class="callout-text" style="margin-top: 8px;">
+                <strong>IBC Classifications (Building Code):</strong><br>
+                • IBC R-3 = 1-2 family dwellings (townhouses, duplexes, 2-unit flats)<br>
+                • IBC R-2 = 3+ dwelling units (apartment buildings)
+            </p>
+            <p class="callout-text" style="margin-top: 8px;">
+                <strong>DC Zoning (Land Use):</strong><br>
+                • RF-1 = Residential Flat zone (allows 2 units MOR)<br>
+                • RF-2, RF-3, RF-4 = Higher density residential flat zones
+            </p>
+            <p class="callout-text" style="margin-top: 8px;"><strong>This property is zoned RF-1 (zoning). A 2-unit conversion would be classified as IBC R-3 (building code).</strong></p>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">DC Construction Code - Sprinkler Triggers</div>
+            <div class="card-subtitle">12 DCMR A (2017 DC Building Code) based on IBC 2015</div>
+            <table>
+                <tr><td>1-2 Family (IBC R-3)</td><td>Not required if ≤3 stories with separate egress <span class="sources">[<a href="https://dob.dc.gov/page/dc-construction-codes">IBC § 903.2.8</a>]</span></td></tr>
+                <tr><td>2-Unit Flat (IBC R-3)</td><td>May not be required if maintaining R-3 classification <span class="sources">[verify w/ DC DOB - § 310.5 is classification only]</span></td></tr>
+                <tr><td>3+ Units (IBC R-2)</td><td>Required throughout <span class="sources">[<a href="https://dob.dc.gov/page/dc-construction-codes">IBC § 903.2.8</a> - verify DC amendments]</span></td></tr>
+                <tr><td>Change of Occupancy</td><td>May trigger if classification changes R-3→R-2 <span class="sources">[<a href="https://dob.dc.gov/page/dc-construction-codes">DC Existing Building Code Ch. 10</a>]</span></td></tr>
+                <tr><td>Level 3 Alteration (>50%)</td><td>Work area >50% of building may trigger full compliance <span class="sources">[<a href="https://dob.dc.gov/page/dc-construction-codes">IEBC § 505.1</a>]</span></td></tr>
+            </table>
+        </div>
+        
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">Applicable NFPA Standards</div>
+                <div class="card-subtitle">Design standards referenced in DC Construction Code (12 DCMR A § 903.3)</div>
+                <table>
+                    <tr><td>NFPA 13D</td><td>1-2 family dwellings (simplest, lowest cost) <span class="sources">[<a href="https://dob.dc.gov/page/dc-construction-codes">IBC § 903.3.1.3</a>]</span></td></tr>
+                    <tr><td>NFPA 13R</td><td>Residential ≤4 stories (most common for flats) <span class="sources">[<a href="https://dob.dc.gov/page/dc-construction-codes">IBC § 903.3.1.2</a>]</span></td></tr>
+                    <tr><td>NFPA 13</td><td>Full commercial standard (if required) <span class="sources">[<a href="https://dob.dc.gov/page/dc-construction-codes">IBC § 903.3.1.1</a>]</span></td></tr>
+                </table>
+                <p class="value-statement">NFPA 13D/13R may allow omission of sprinklers in certain spaces (bathrooms, closets, etc.) under specific conditions. Verify allowable omissions with fire protection engineer.</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Cost Considerations</div>
+                <div class="card-subtitle">Budget planning estimates only</div>
+                <table>
+                    <tr><td>Standalone System</td><td>$3-6/SF typical (dedicated piping)</td></tr>
+                    <tr><td>Multipurpose System</td><td>$2-4/SF typical (shared with plumbing)</td></tr>
+                    <tr><td>DC Water Tap Fee</td><td>Varies by meter size · <a href="https://www.dcwater.com/permits/request-information">Request Info</a> · <a href="https://www.dcwater.com/permits/application-types">Application Types</a></td></tr>
+                    <tr><td>Fire Alarm System</td><td>May be required for IBC R-2 occupancies <span class="sources">[<a href="https://dob.dc.gov/page/dc-construction-codes">IBC § 907.2.9</a> - verify DC requirements]</span></td></tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">Sprinkler Requirement Triggers - Summary</div>
+            <div class="card-subtitle">When sprinklers may be required - ALL ITEMS SUBJECT TO DC DOB CONFIRMATION</div>
+            <ul>
+                <li><strong>3+ dwelling units:</strong> Building classified as IBC R-2, sprinklers likely required <span class="sources">[<a href="https://dob.dc.gov/page/dc-construction-codes">IBC § 903.2.8</a> - verify DC amendments]</span></li>
+                <li><strong>New construction:</strong> IRC § R313.1 requires sprinklers in new 1-2 family (DC adopted)</li>
+                <li><strong>Change of use to IBC R-2:</strong> Converting from R-3 to R-2 may trigger requirement <span class="sources">[<a href="https://dob.dc.gov/page/dc-construction-codes">DC Existing Building Code Ch. 10</a>]</span></li>
+                <li><strong>Level 3 alteration (>50% work area):</strong> May trigger full code compliance <span class="sources">[<a href="https://dob.dc.gov/page/dc-construction-codes">IEBC § 505.1</a>]</span></li>
+                <li><strong>Height >3 stories:</strong> May trigger additional fire protection requirements</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">Sprinkler May Not Be Required</div>
+            <div class="card-subtitle">Common scenarios - VERIFY ALL WITH DC DOB AND FEMS</div>
+            <ul>
+                <li>2-unit flat conversion in existing building (if maintaining IBC R-3 classification) <span class="sources">[verify w/ DOB]</span></li>
+                <li>Interior renovation without change of occupancy <span class="sources">[verify scope thresholds w/ DOB]</span></li>
+                <li>Additions to existing non-sprinklered 1-2 family (if under thresholds) <span class="sources">[verify w/ DOB]</span></li>
+                <li>Basement underpinning (if no change in unit count or occupancy) <span class="sources">[verify w/ DOB]</span></li>
+            </ul>
+            <p class="value-statement"><strong>⚠️ These are general guidelines only.</strong> Actual requirements depend on scope of work, existing conditions, and DC DOB/FEMS interpretation. Even when not required, voluntary sprinkler installation may reduce insurance costs and improve resale value.</p>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">Fire Protection Resources</div>
+            <table>
+                <tr><td>DC Fire & EMS</td><td><a href="https://fems.dc.gov">fems.dc.gov</a></td></tr>
+                <tr><td>DC Construction Codes</td><td><a href="https://dob.dc.gov/page/dc-construction-codes">dob.dc.gov/page/dc-construction-codes</a></td></tr>
+                <tr><td>NFPA 13D (Residential)</td><td><a href="https://www.nfpa.org/codes-and-standards/nfpa-13d-standard-development/13d">nfpa.org/13d</a></td></tr>
+                <tr><td>NFPA 13R (Low-Rise)</td><td><a href="https://www.nfpa.org/codes-and-standards/nfpa-13r-standard-development/13r">nfpa.org/13r</a></td></tr>
+                <tr><td>Home Fire Sprinkler Coalition</td><td><a href="https://homefiresprinkler.org">homefiresprinkler.org</a></td></tr>
+            </table>
+        </div>
+    </section>
+    
+    <!-- Risk Factors -->
+    <section>
+        <div class="section-header">Risk Factors</div>
+        {% if high_risks %}
+        <div class="callout callout-alert">
+            <div class="callout-title">High Priority</div>
+            <ul style="margin: 8px 0 0 16px;">
+                {% for risk in high_risks %}
+                <li>{{ risk }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        
+        {% if medium_risks %}
+        <div class="callout callout-warning">
+            <div class="callout-title">Moderate Priority</div>
+            <ul style="margin: 8px 0 0 16px;">
+                {% for risk in medium_risks %}
+                <li>{{ risk }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </section>
+    
+    <!-- Neighborhood Context -->
+    <section>
+        <div class="section-header">Neighborhood Context</div>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">ANC / SMD</div>
+                <div class="card-subtitle">Advisory Neighborhood Commission</div>
+                <table>
+                    <tr><td>ANC</td><td>{{ anc }}</td></tr>
+                    <tr><td>SMD</td><td>{{ smd }}</td></tr>
+                    {% if anc_commissioner %}
+                    <tr><td>Commissioner</td><td>{{ anc_commissioner }}</td></tr>
+                    {% endif %}
+                    {% if anc_commissioner_email %}
+                    <tr><td>Contact</td><td>{{ anc_commissioner_email }}</td></tr>
+                    {% endif %}
+                </table>
+                <p class="value-statement">ANC notification required for BZA applications. Early engagement recommended.</p>
+            </div>
+        </div>
+        
+        {% if recent_bza_cases %}
+        <div class="card">
+            <div class="card-title">Recent BZA Cases on Block</div>
+            <div class="card-subtitle">Precedent for similar relief requests</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Case #</th>
+                        <th>Address</th>
+                        <th>Relief Requested</th>
+                        <th>Date</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for case in recent_bza_cases %}
+                    <tr>
+                        <td>{{ case.number }}</td>
+                        <td>{{ case.address }}</td>
+                        <td>{{ case.relief }}</td>
+                        <td>{{ case.date }}</td>
+                        <td><span class="status status-{{ case.result_class }}">{{ case.result }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p class="value-statement">Prior approvals suggest BZA receptivity to similar requests, but each case decided on its own merits.</p>
+        </div>
+        {% endif %}
+    </section>
+    
+    <!-- Next Steps -->
+    <section>
+        <div class="section-header">Recommended Next Steps</div>
+        
+        <div class="callout callout-warning">
+            <div class="callout-title">⚠️ Important</div>
+            <p class="callout-text">All data in this report requires independent verification. Do not rely on this report for acquisition, design, or construction decisions without professional verification from licensed architects, engineers, surveyors, and attorneys.</p>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">Site Research & Verification</div>
+            <div class="card-subtitle">Complete before acquisition or design</div>
+            <table>
+                <tr><td>Google Earth / Street View</td><td>Review aerial imagery, check for additions, verify rear yard conditions, identify adjacent chimneys<br><a href="https://earth.google.com">earth.google.com</a></td></tr>
+                <tr><td>DC PropertyQuest</td><td>Verify SSL, zoning, lot size, historic status, ward, ANC<br><a href="https://propertyquest.dc.gov">propertyquest.dc.gov</a></td></tr>
+                <tr><td>DC OTR (Tax Records)</td><td>Verify current ownership, tax status, assessment appeals<br><a href="https://mytax.dc.gov/_/">mytax.dc.gov</a></td></tr>
+                <tr><td>Scout DC (Permits)</td><td>Check permit history, open violations, stop work orders (requires Access DC login)<br><a href="https://scout.dcra.dc.gov">scout.dcra.dc.gov</a></td></tr>
+                <tr><td>DC Recorder of Deeds</td><td>Verify deed, check for liens, easements, covenants<br><a href="https://recorder.dc.gov">recorder.dc.gov</a></td></tr>
+            </table>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">Utility Verification</div>
+            <div class="card-subtitle">Verify capacity and connection requirements</div>
+            <table>
+                <tr><td>DC Water</td><td>Verify water/sewer service, check for combined sewer, capacity for additional units<br><a href="https://www.dcwater.com">dcwater.com</a> · <a href="https://www.dcwater.com/permits/request-information">Permits Info</a> · <a href="https://www.dcwater.com/permits/application-types">Application Types</a> · <a href="https://geo.dcwater.com/Lead/">Lead Service Line Map</a></td></tr>
+                <tr><td>Washington Gas</td><td>Verify gas service, check meter location, capacity for additional load<br><a href="https://www.washingtongas.com">washingtongas.com</a></td></tr>
+                <tr><td>Pepco</td><td>Verify electrical service, panel capacity, transformer proximity<br><a href="https://www.pepco.com">pepco.com</a></td></tr>
+            </table>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">Site Research Tools</div>
+            <div class="card-subtitle">Free online resources for due diligence</div>
+            <table>
+                <tr><td>Solar Potential</td><td>Google Project Sunroof - estimate rooftop solar capacity and savings<br><a href="https://sunroof.withgoogle.com/">sunroof.withgoogle.com</a></td></tr>
+                <tr><td>Lead Service Lines</td><td>DC Water lead pipe map - check for lead water service lines<br><a href="https://geo.dcwater.com/Lead/">geo.dcwater.com/Lead</a></td></tr>
+                <tr><td>Street Trees</td><td>DC Urban Forestry inventory - identify protected street trees near property<br><a href="https://opendata.dc.gov/datasets/DCGIS::urban-forestry-street-trees/about">DC Open Data - Street Trees</a></td></tr>
+            </table>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">DC GIS Mapping Tools</div>
+            <div class="card-subtitle">Interactive maps for property research</div>
+            <table>
+                <tr><td>DC Zoning Map</td><td>Official interactive zoning map - verify zone designation<br><a href="https://maps.dcoz.dc.gov/">maps.dcoz.dc.gov</a></td></tr>
+                <tr><td>OTR Assessment Map</td><td>Property assessment data, tax records, comparable sales<br><a href="https://dcgis.maps.arcgis.com/apps/webappviewer/index.html?id=9a5c11c11dd347cc9c05d64499cc98ee">DC GIS - OTR Assessment Map</a></td></tr>
+                <tr><td>Real Property Finder</td><td>Property boundaries, ownership, lot dimensions<br><a href="https://dcgis.maps.arcgis.com/apps/webappviewer/index.html?id=3ca919beca684ea7bd7d1ced0dbbf636">DC GIS - Real Property Finder</a></td></tr>
+                <tr><td>SurDocs Map</td><td>Surveyor documents, plats, subdivision records<br><a href="https://dcgis.maps.arcgis.com/apps/webappviewer/index.html?id=941e2c9829e04dc5b3cbd36f72e19f0e">DC GIS - SurDocs Map</a></td></tr>
+                <tr><td>DC Open Data</td><td>Apps and maps gallery - all DC GIS resources<br><a href="https://opendata.dc.gov/pages/apps-and-maps">opendata.dc.gov - Apps & Maps</a></td></tr>
+            </table>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">DC Government Agencies</div>
+            <div class="card-subtitle">Permitting, zoning, and regulatory contacts</div>
+            <table>
+                <tr><td>DC DOB (Building Permits)</td><td>Permit applications, plan review, inspections<br><a href="https://dob.dc.gov">dob.dc.gov</a></td></tr>
+                <tr><td>DC Office of Zoning</td><td>Zoning interpretations, BZA applications, zoning certifications<br><a href="https://dcoz.dc.gov">dcoz.dc.gov</a></td></tr>
+                <tr><td>DC HPO (Historic)</td><td>Historic preservation review, HPRB applications (if applicable)<br><a href="https://planning.dc.gov/page/historic-preservation">planning.dc.gov/page/historic-preservation</a></td></tr>
+                <tr><td>DDOT (Public Space)</td><td>Public space permits, curb cuts, sidewalk work<br><a href="https://ddot.dc.gov">ddot.dc.gov</a></td></tr>
+                <tr><td>DOEE (Environment)</td><td>Stormwater management, green area ratio, tree permits<br><a href="https://doee.dc.gov">doee.dc.gov</a></td></tr>
+                <tr><td>DC Fire & EMS</td><td>Fire code review, sprinkler requirements, egress<br><a href="https://fems.dc.gov">fems.dc.gov</a></td></tr>
+            </table>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">Professional Services Required</div>
+            <div class="card-subtitle">Engage before finalizing scope</div>
+            <table>
+                <tr><td>Licensed Surveyor</td><td>Verify lot boundaries, setbacks, easements, topography</td></tr>
+                <tr><td>Structural Engineer</td><td>Assess foundation, party walls, load capacity for additions/underpinning</td></tr>
+                <tr><td>Architect</td><td>Zoning analysis, code compliance, design development</td></tr>
+                <tr><td>Title Company</td><td>Full title search, lien search, easement review</td></tr>
+                <tr><td>MEP Engineer</td><td>Mechanical, electrical, plumbing design (if major renovation)</td></tr>
+                <tr><td>Fire Protection Engineer</td><td>Sprinkler design, egress analysis (if required)</td></tr>
+            </table>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">Site Visit Checklist</div>
+            <div class="card-subtitle">Items to verify in person</div>
+            <ul>
+                <li>Adjacent building chimneys (location, height, condition) - affects 3rd story potential</li>
+                <li>Rear yard depth and conditions - alley access, neighboring structures</li>
+                <li>Party wall condition - cracks, settlement, moisture</li>
+                <li>Basement condition - ceiling height, moisture, foundation walls</li>
+                <li>Roof condition and structure type</li>
+                <li>Electrical panel location and capacity</li>
+                <li>Gas meter location</li>
+                <li>Water service entry point</li>
+                <li>Existing unpermitted work (verify against permit records)</li>
+            </ul>
+        </div>
+    </section>
+    
+    <!-- Data Sources -->
+    <section class="sources">
+        <div class="section-header">Data Sources</div>
+        <div class="card">
+            <table>
+                {% for source in sources %}
+                <tr>
+                    <td>{{ source.name }}</td>
+                    <td><a href="{{ source.url }}">{{ source.url }}</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+    
+    <footer class="report-footer">
+        <div class="card" style="background: #fff3e0; border-color: #ef6c00;">
+            <div class="card-title">Known Data Quality Issues</div>
+            <ul style="font-size: 8px; color: var(--text-secondary); margin-top: 8px;">
+                <li><strong>Ownership Data:</strong> Redfin, Zillow, and Blockshopper may show ownership data that is MONTHS OR YEARS out of date. Always verify via DC OTR: https://mytax.dc.gov/_/</li>
+                <li><strong>Lot Dimensions:</strong> Lot sizes from listing sites are estimates only. Survey required for accurate dimensions.</li>
+                <li><strong>Permit/Violation History:</strong> Not searched in this report. Verify via Scout DC: https://scout.dcra.dc.gov (requires Access DC login)</li>
+                <li><strong>Zoning:</strong> Zone designation should be confirmed via PropertyQuest: https://propertyquest.dc.gov</li>
+                <li><strong>Historic Status:</strong> Should be confirmed via PropertyQuest: https://propertyquest.dc.gov</li>
+                <li><strong>Assessment Values:</strong> Tax assessments lag market values by 20-40% and do not reflect purchase price.</li>
+            </ul>
+        </div>
+        <div class="card" style="background: #fff3e0; border-color: #ef6c00; margin-top: 12px;">
+            <div class="card-title">Important Disclaimers</div>
+            <ul style="font-size: 8px; color: var(--text-secondary); margin-top: 8px;">
+                <li><strong>Not a Survey:</strong> Lot dimensions and setback distances are estimates from public records. A licensed surveyor must verify exact boundaries, setbacks, and easements before design or construction.</li>
+                <li><strong>Not Structural Engineering:</strong> All buildable area calculations, underpinning feasibility, and load-bearing assessments require verification by a licensed structural engineer. Foundation conditions, party wall integrity, and existing framing capacity are unknown without physical inspection.</li>
+                <li><strong>Not Legal Advice:</strong> Zoning interpretations are based on ZR16 as currently published. Confirm all interpretations with DC Office of Zoning. BZA precedent does not guarantee approval of similar relief.</li>
+                <li><strong>Not Title Research:</strong> This report does not identify liens, easements, covenants, or title defects. Order a full title search before acquisition.</li>
+                <li><strong>Data Currency:</strong> Property records, permit status, and ownership may have changed since data collection. Verify all critical facts with primary sources before relying on this report.</li>
+                <li><strong>Adjacent Property Constraints:</strong> Chimney, solar panel, and heritage tree constraints not assessed. Physical inspection and neighbor communication required to identify constraints and obtain necessary agreements.</li>
+                <li><strong>Cost Estimates:</strong> No construction cost estimates are provided. Actual costs depend on scope, market conditions, site access, and contractor selection.</li>
+                <li><strong>Permit Timeline:</strong> Processing times are estimates based on typical DC DOB performance. Actual timelines vary based on plan complexity, review cycles, and agency workload.</li>
+                <li><strong>Fire Protection:</strong> Sprinkler requirements summarized for planning purposes only. Actual requirements depend on building classification, scope of work, and code interpretation by DC DOB and FEMS. Consult a fire protection engineer for project-specific requirements.</li>
+            </ul>
+        </div>
+        <div class="callout callout-warning" style="margin-top: 12px; padding: 12px;">
+            <p class="callout-text" style="font-size: 9px;"><strong>Data Verification Statement:</strong> Zoning, permitting, and historic status were verified using publicly available District of Columbia databases as of {{ date }}. Final determinations are subject to confirmation by DC Department of Buildings (DOB) and DC Office of Zoning (DCOZ). This report does not constitute a zoning certification, permit approval, or legal opinion.</p>
+        </div>
+        <p style="margin-top: 12px;">This report is for preliminary feasibility assessment only. Professional verification required before acquisition, design, or construction decisions.</p>
+    </footer>
+</body>
+</html>
